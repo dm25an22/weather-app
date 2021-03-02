@@ -8,22 +8,17 @@ export default class Api {
 
   static async _apiGET(url, headers) {
     try {
-      const response = await fetch(url, {
-        "method": "GET",
-        headers
-      });
+      const response = await fetch(url);
       return this._checkStatus(response);
     } catch (error) {
       throw error;
     }
   }
 
-  static async fetchForecastData() {
+  static async fetchForecastData(lat, lon) {
+    console.log(lat, lon)
     try {
-      return await this._apiGET(`https://community-open-weather-map.p.rapidapi.com/forecast?q=san%20francisco%2Cus`, {
-        "x-rapidapi-key": "0861a540bbmsh9ef63039d5fd203p1883bejsn220d1c3c7cd8",
-        "x-rapidapi-host": "community-open-weather-map.p.rapidapi.com"
-      });
+      return await this._apiGET(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=hourly,minutely&appid=7bec40103ce21d5342466aba6282e18f&units=metric`);
     } catch (error) {
       throw error
     }

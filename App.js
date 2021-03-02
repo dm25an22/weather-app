@@ -1,20 +1,27 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { Provider } from 'react-redux';
 import { applyMiddleware, createStore } from 'redux';
-import Api from './api';
-import Header from './components/header';
-import Info from './components/info';
-import Week from './components/week';
-import { rootReducer } from './redux/reducer';
+import Api from './src/api';
+import Header from './src/components/header';
+import Info from './src/components/info';
+import Week from './src/components/week';
+import { rootReducer } from './src/redux/reducer';
 
 const store = createStore(rootReducer)
 
 export default function App() {
 
   async function fetchData() {
-    const data = await Api.fetchForecastData();
+    const {coords} = await getPosition();
+    const data = await Api.fetchForecastData(coords.latitude, coords.longitude);
   }
+
+  function getPosition() {
+    return new Promise((resolve, reject) => 
+      navigator.geolocation.getCurrentPosition(resolve, reject)
+    );
+}
 
   useEffect(() => {
     fetchData();
