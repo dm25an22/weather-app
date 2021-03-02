@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { Provider } from 'react-redux';
 import { applyMiddleware, createStore } from 'redux';
+import thunk from 'redux-thunk';
 import Api from './src/api';
 import Header from './src/components/header';
 import Info from './src/components/info';
 import Week from './src/components/week';
 import { rootReducer } from './src/redux/reducer';
 
-const store = createStore(rootReducer)
+const store = createStore(rootReducer, applyMiddleware(thunk));
 
 export default function App() {
 

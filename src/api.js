@@ -16,7 +16,6 @@ export default class Api {
   }
 
   static async fetchForecastData(lat, lon) {
-    console.log(lat, lon)
     try {
       return await this._apiGET(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=hourly,minutely&appid=7bec40103ce21d5342466aba6282e18f&units=metric`);
     } catch (error) {

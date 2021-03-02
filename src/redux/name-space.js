@@ -1,3 +1,4 @@
 export const NameSpace = {
-  WHETHER: 'WHETHER'
+  WHETHER: 'WHETHER',
+  APP_STATE: 'APP_STATE'
 };
