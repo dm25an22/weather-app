@@ -7,7 +7,6 @@ export default class Api {
   }
 
   static async _apiGET(url, headers) {
-    console.log("ok")
     try {
       const response = await fetch(url, {
         "method": "GET",

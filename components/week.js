@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import Day from '../day';
+import Day from './day';
 
 export default function Week() {
   return (
