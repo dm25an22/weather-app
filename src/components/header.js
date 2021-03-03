@@ -10,6 +10,7 @@ export default function Header() {
   const minTemp = Math.round(daily[0].temp.min);
   const maxTemp = Math.round(daily[0].temp.max);
   const feelsLike = Math.round(current.feelsLike);
+  const icon = current.weather[0].icon;
 
   return (
     <View style={styles.headerContainer}>
