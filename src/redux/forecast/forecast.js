@@ -1,6 +1,7 @@
 import Api from "../../api";
 import { getGeoPosition } from "../../utils/geoposition";
-import camelcaseKeys  from "camelcase-keys"
+import camelcaseKeys  from "camelcase-keys";
+import { ActionCreator as appStateActionCreator } from "../app-state/app-state";
 
 const initialState = {
   forecast: null,
@@ -27,9 +28,9 @@ export const Operation = {
         const {coords} = await getGeoPosition();
         const cityName = await Api.getCityName(coords.latitude, coords.longitude);
         const forecast = await Api.fetchForecastData(coords.latitude, coords.longitude);
-
         forecast.cityName = cityName[0].name;
         dispatch(ActionCreator.fetchForecast(camelcaseKeys(forecast, {deep: true})));
+        dispatch(appStateActionCreator.setSelectedDay(new Date(forecast.current.dt * 1000)))
         onSuccess();
       } catch (error) {
         onError();
