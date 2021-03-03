@@ -1,11 +1,15 @@
 import React from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import { getWeekDay } from '../utils/date-helper';
 
-export default function Day() {
+export default function Day({ data }) {
+  const { item } = data;
+  const weekDay = getWeekDay(new Date(item.dt * 1000));
+
   return (
     <TouchableOpacity>
       <View style={styles.dayBtn}>
-        <Text style={styles.dayText}>Пн</Text>
+        <Text style={styles.dayText}>{weekDay}</Text>
       </View>
     </TouchableOpacity>
   );
@@ -13,8 +17,8 @@ export default function Day() {
 
 const styles = StyleSheet.create({
   dayBtn: {
-    marginLeft: 10,
-    marginRight: 10,
+    marginLeft: 12,
+    marginRight: 12,
   },
 
   dayText: {
