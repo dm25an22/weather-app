@@ -3,14 +3,14 @@ import { Provider } from 'react-redux';
 import { applyMiddleware, createStore } from 'redux';
 import thunk from 'redux-thunk';
 import { rootReducer } from './src/redux/reducer';
-import Main from './src/pages/main';
+import LoaderContainer from "./src/components/loader-container";
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
 export default function App() {
   return (
     <Provider store={store}>
-      <Main />
+      <LoaderContainer />
     </Provider>
   );
 };

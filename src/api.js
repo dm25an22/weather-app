@@ -6,7 +6,7 @@ export default class Api {
     throw new Error(`${response.status}: ${response.statusText}`);
   }
 
-  static async _apiGET(url, headers) {
+  static async _apiGET(url) {
     try {
       const response = await fetch(url);
       return this._checkStatus(response);

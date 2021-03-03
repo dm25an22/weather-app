@@ -1,5 +1,5 @@
 const initialState = {
-  selectedDay: null,
+  selectedDay: new Date(),
 };
 
 const ActionType = {

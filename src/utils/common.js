@@ -11,7 +11,14 @@ const weatherCondition = {
 
 const nightBackground = "#0d335d";
 
-export function getBackgroundColorByCondition(payload, sunset) {
+export function getBackgroundColorByCondition(payload, sunset, sunrise) {
+  const dateNow = new Date();
+  const sunsetDate = new Date(sunset * 1000);
+  const sunriseDate = new Date(sunrise * 1000);
+
+  if (dateNow > sunsetDate || dateNow < sunriseDate) {
+    return nightBackground;
+  }
   const condition = payload.toLowerCase();
   if (condition in weatherCondition) {
     return weatherCondition[condition];
