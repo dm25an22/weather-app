@@ -22,4 +22,12 @@ export default class Api {
       throw error
     }
   }
+
+  static async getCityName(lat, lon) {
+    try {
+      return await this._apiGET(`http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}8&lon=${lon}&limit=1&appid=7bec40103ce21d5342466aba6282e18f`);
+    } catch (error) {
+      throw error
+    }
+  }
 }

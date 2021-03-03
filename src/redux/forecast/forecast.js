@@ -1,3 +1,4 @@
+import Api from "../../api";
 import { getGeoPosition } from "../../utils/geoposition";
 
 const initialState = {
@@ -19,14 +20,17 @@ export const ActionCreator = {
 
 
 export const Operation = {
-  fetchForecast() {
-    return async (dispatch) => {
+  fetchForecast(onSuccess, onError) {
+    return async (dispatch, getState) => {
       try {
         const {coords} = await getGeoPosition();
+        const cityName = await Api.getCityName(coords.latitude, coords.longitude);
         const forecast = await Api.fetchForecastData(coords.latitude, coords.longitude);
+        forecast.cityName = cityName[0].name;
         dispatch(ActionCreator.fetchForecast(forecast));
+        onSuccess();
       } catch (error) {
-        
+        onError();
       }
     }
   }
