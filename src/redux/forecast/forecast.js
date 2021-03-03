@@ -1,5 +1,6 @@
 import Api from "../../api";
 import { getGeoPosition } from "../../utils/geoposition";
+import camelcaseKeys  from "camelcase-keys"
 
 const initialState = {
   forecast: null,
@@ -26,8 +27,9 @@ export const Operation = {
         const {coords} = await getGeoPosition();
         const cityName = await Api.getCityName(coords.latitude, coords.longitude);
         const forecast = await Api.fetchForecastData(coords.latitude, coords.longitude);
+
         forecast.cityName = cityName[0].name;
-        dispatch(ActionCreator.fetchForecast(forecast));
+        dispatch(ActionCreator.fetchForecast(camelcaseKeys(forecast, {deep: true})));
         onSuccess();
       } catch (error) {
         onError();
