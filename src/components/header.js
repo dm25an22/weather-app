@@ -4,13 +4,12 @@ import { useSelector } from 'react-redux';
 import { getForecast } from '../redux/forecast/forecast-selector';
 
 export default function Header() {
-  const { cityName, current, daily } = useSelector(getForecast);
+  const { cityName, current, daily, alert } = useSelector(getForecast);
   const main = current.weather[0].main;
-  const currentTemp = Math.round(current.temp);
-  const minTemp = Math.round(daily[0].temp.min);
-  const maxTemp = Math.round(daily[0].temp.max);
-  const feelsLike = Math.round(current.feelsLike);
-  const icon = current.weather[0].icon;
+  const currentTemp = Math.floor(current.temp);
+  const minTemp = Math.floor(daily[0].temp.min);
+  const maxTemp = Math.floor(daily[0].temp.max);
+  const feelsLike = Math.floor(current.feelsLike);
 
   return (
     <View style={styles.headerContainer}>

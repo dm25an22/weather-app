@@ -9,9 +9,13 @@ export default function Day({ data }) {
   const selectedDay = useSelector(getSelectedDay);
   const dispatch = useDispatch();
   const { item } = data;
+  const {min, max} = item.temp;
   const date = new Date(item.dt * 1000);
   const weekDay = getWeekDay(date);
   const icon = item.weather[0].icon;
+
+  const minTemp = Math.floor(min);
+  const maxTemp = Math.floor(max);
 
   function getStyle() {
     return selectedDay.getDate() === date.getDate() ? styles.activeDay : styles.dayText;
@@ -31,6 +35,11 @@ export default function Day({ data }) {
             uri: `http://openweathermap.org/img/wn/${icon}@2x.png`,
           }}
         />
+        <View style={styles.tempConteiner}>
+          <Text style={styles.tempMax}>{maxTemp}</Text>
+          <Text style={styles.tempMin}>{minTemp}</Text>
+        </View>
+
       </View>
     </TouchableOpacity>
   );
@@ -59,5 +68,23 @@ const styles = StyleSheet.create({
   icon: {
     width: 40,
     height: 40,
-  }
+  },
+
+  tempConteiner: {
+    flexDirection: "row",
+    justifyContent: "center"
+  },
+
+  tempMax: {
+    color: '#fff',
+    textAlign: "center",
+    marginHorizontal: 5,
+  },
+
+  tempMin: {
+    color: '#264653',
+    opacity: 0.8,
+    textAlign: "center",
+    marginHorizontal: 5,
+  },
 });

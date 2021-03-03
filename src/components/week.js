@@ -6,7 +6,7 @@ import { getForecast } from '../redux/forecast/forecast-selector';
 import Day from './day';
 
 export default function Week() {
-  const { daily } =useSelector(getForecast);
+  const { daily } = useSelector(getForecast);
 
   function renderItem(data) {
     return <Day data={data} />
