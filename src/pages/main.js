@@ -1,14 +1,17 @@
 import React, { useEffect } from 'react';
-import { StyleSheet, View, ScrollView, Text } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { StyleSheet, View, ScrollView } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import Header from '../components/header';
 import Info from '../components/info';
 import Week from '../components/week';
 import { useLoadStatus } from '../hooks';
 import { Operation as forecastOperation } from '../redux/forecast/forecast';
+import { getForecast } from '../redux/forecast/forecast-selector';
+import { getBackgroundColorByCondition } from '../utils/common';
 
 export default function Main() {
   const { isLoaded, setIsLoaded, error, setError } = useLoadStatus();
+  const forecast = useSelector(getForecast);
   const dispatch = useDispatch();
 
   function onSuccess() {
@@ -29,8 +32,9 @@ export default function Main() {
     } else if (!isLoaded) {
       return <View style={styles.container}></View>;
     } else {
+      const condition = forecast.current.weather[0].main;
       return (
-        <View style={styles.container}>
+        <View style={{flex: 1, backgroundColor: `${getBackgroundColorByCondition(condition)}`}}>
           <Header />
           <Week />
           <ScrollView style={styles.moreInfoContainer}>
@@ -50,7 +54,6 @@ export default function Main() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'rgba(34, 167, 240, 1)',
     flex: 1,
   },
 });

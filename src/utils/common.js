@@ -1,3 +1,25 @@
+const weatherCondition = {
+  thunderstorm: "#1b262c",
+  drizzle: "#4b5d67",
+  rain: "#4b5d67",
+  snow: "#84a9ac",
+  mist: "'#7e8a97",
+  clear: "rgba(34, 167, 240, 1)",
+  clouds: "#a6b1e1",
+  atmosphere: "#333333"
+}
+
+const nightBackground = "#0d335d";
+
+export function getBackgroundColorByCondition(payload, sunset) {
+  const condition = payload.toLowerCase();
+  if (condition in weatherCondition) {
+    return weatherCondition[condition];
+  }
+  return weatherCondition[atmosphere]
+}
+
+
 export function convertWindSpeedFromMstoKm(ms) {
   const metrsInMinute = ms * 60;
   const metrPerHour = metrsInMinute * 60;
@@ -54,4 +76,12 @@ export function getWindDirection(deg) {
     default:
       "Not correct degrees";
   }
+};
+
+export function roundFloor(obj) {
+  const cloneObj = { ...obj };
+  for (const [key, value] of Object.entries(cloneObj)) {
+    cloneObj[key] = Math.floor(value);
+  }
+  return cloneObj;
 }

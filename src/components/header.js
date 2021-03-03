@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { getForecast } from '../redux/forecast/forecast-selector';
 
 export default function Header() {
-  const { cityName, current, daily, alert } = useSelector(getForecast);
+  const { cityName, current, daily } = useSelector(getForecast);
   const main = current.weather[0].main;
   const currentTemp = Math.floor(current.temp);
   const minTemp = Math.floor(daily[0].temp.min);
@@ -24,9 +24,9 @@ export default function Header() {
 
 const styles = StyleSheet.create({
   headerContainer: {
-    padding: 40,
+    paddingTop: "15%",
+    paddingBottom: "10%",
     alignItems: 'center',
-    justifyContent: 'center',
   },
 
   cityName: {

@@ -29,8 +29,9 @@ export const Operation = {
         const cityName = await Api.getCityName(coords.latitude, coords.longitude);
         const forecast = await Api.fetchForecastData(coords.latitude, coords.longitude);
         forecast.cityName = cityName[0].name;
-        dispatch(ActionCreator.fetchForecast(camelcaseKeys(forecast, {deep: true})));
-        dispatch(appStateActionCreator.setSelectedDay(new Date(forecast.current.dt * 1000)))
+        const adaptedForecast = camelcaseKeys(forecast, {deep: true});
+        dispatch(ActionCreator.fetchForecast(adaptedForecast));
+        dispatch(appStateActionCreator.setSelectedDay(new Date(adaptedForecast.current.dt * 1000)))
         onSuccess();
       } catch (error) {
         onError();

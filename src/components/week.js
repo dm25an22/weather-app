@@ -1,7 +1,6 @@
 import React from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
 import { useSelector } from 'react-redux';
-import { getSelectedDay } from '../redux/app-state/app-state-selector';
 import { getForecast } from '../redux/forecast/forecast-selector';
 import Day from './day';
 
@@ -29,7 +28,7 @@ export default function Week() {
 
 const styles = StyleSheet.create({
   weekConatiner: {
-    justifyContent: "center"
+    alignItems: "center",
   },
 
   daysContainer: {

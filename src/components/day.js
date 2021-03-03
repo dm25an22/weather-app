@@ -39,7 +39,6 @@ export default function Day({ data }) {
           <Text style={styles.tempMax}>{maxTemp}</Text>
           <Text style={styles.tempMin}>{minTemp}</Text>
         </View>
-
       </View>
     </TouchableOpacity>
   );
@@ -59,7 +58,7 @@ const styles = StyleSheet.create({
   },
 
   activeDay: {
-    color: "#264653",
+    color: "#e6b566",
     fontSize: 18,
     textAlign: "center",
     marginBottom: 10
@@ -82,8 +81,7 @@ const styles = StyleSheet.create({
   },
 
   tempMin: {
-    color: '#264653',
-    opacity: 0.8,
+    color: '#686d76',
     textAlign: "center",
     marginHorizontal: 5,
   },

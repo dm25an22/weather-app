@@ -2,27 +2,15 @@ import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { useSelector } from 'react-redux';
 import { getDayInfoBySelectedDay } from '../redux/app-state/app-state-selector';
-import { convertWindSpeedFromMstoKm, getWindDirection } from '../utils/common';
+import { convertWindSpeedFromMstoKm, getWindDirection, roundFloor } from '../utils/common';
 import { getTime } from '../utils/date-helper';
 import InfoItem from "./info-item";
 
 export default function Info() {
   const dayInfo = useSelector(getDayInfoBySelectedDay);
   const { pressure, humidity, clouds, uvi, pop, weather, windSpeed, windDeg } = dayInfo;
-  const { morn, day, eve, night, min, max } = dayInfo.temp;
-  const { morn: mornFl, day: dayFl, eve: eveFL, night: nightFl } = dayInfo.feelsLike;
-
-  const mornFlTemp = Math.floor(mornFl);
-  const dayFlTemp = Math.floor(dayFl);
-  const eveFLTemp = Math.floor(eveFL);
-  const nightFlTemp = Math.floor(nightFl);
-
-  const mornTemp = Math.floor(morn);
-  const dayTemp = Math.floor(day);
-  const eveTemp = Math.floor(eve);
-  const nightTemp = Math.floor(night);
-  const minTemp = Math.floor(min);
-  const maxTemp = Math.floor(max);
+  const { morn, day, eve, night, min, max } = roundFloor(dayInfo.temp);
+  const { morn: mornFl, day: dayFl, eve: eveFL, night: nightFl } = roundFloor(dayInfo.feelsLike);
 
   const sunrise = getTime(new Date(dayInfo.sunrise * 1000));
   const sunset = getTime(new Date(dayInfo.sunset * 1000));
@@ -33,24 +21,24 @@ export default function Info() {
   return (
     <View style={styles.container}>
       <View style={styles.infoContainer}>
-        <InfoItem title={"Morning temperature"} info={`${mornTemp}${'\u00b0'}`}>
-          <Text style={styles.additionalText}>Feels like {mornFlTemp}{'\u00b0'}</Text>
+        <InfoItem title={"Morning temperature"} info={`${morn}${'\u00b0'}`}>
+          <Text style={styles.additionalText}>Feels like {mornFl}{'\u00b0'}</Text>
         </InfoItem>
-        <InfoItem title={"Day temperature"} info={`${dayTemp}${'\u00b0'}`}>
-          <Text style={styles.additionalText}>Feels like {dayFlTemp}{'\u00b0'}</Text>
-        </InfoItem>
-      </View>
-      <View style={styles.infoContainer}>
-        <InfoItem title={"Evening temperature"} info={`${eveTemp}${'\u00b0'}`}>
-          <Text style={styles.additionalText}>Feels like {eveFLTemp}{'\u00b0'}</Text>
-        </InfoItem>
-        <InfoItem title={"Night temperature"} info={`${nightTemp}${'\u00b0'}`}>
-          <Text style={styles.additionalText}>Feels like {nightFlTemp}{'\u00b0'}</Text>
+        <InfoItem title={"Day temperature"} info={`${day}${'\u00b0'}`}>
+          <Text style={styles.additionalText}>Feels like {dayFl}{'\u00b0'}</Text>
         </InfoItem>
       </View>
       <View style={styles.infoContainer}>
-        <InfoItem title={"Min daily temperature"} info={`${minTemp}${'\u00b0'}`} />
-        <InfoItem title={"Max daily temperature"} info={`${maxTemp}${'\u00b0'}`} />
+        <InfoItem title={"Evening temperature"} info={`${eve}${'\u00b0'}`}>
+          <Text style={styles.additionalText}>Feels like {eveFL}{'\u00b0'}</Text>
+        </InfoItem>
+        <InfoItem title={"Night temperature"} info={`${night}${'\u00b0'}`}>
+          <Text style={styles.additionalText}>Feels like {nightFl}{'\u00b0'}</Text>
+        </InfoItem>
+      </View>
+      <View style={styles.infoContainer}>
+        <InfoItem title={"Min daily temperature"} info={`${min}${'\u00b0'}`} />
+        <InfoItem title={"Max daily temperature"} info={`${max}${'\u00b0'}`} />
       </View>
       <View style={styles.infoContainer}>
         <InfoItem title={"Sunrise"} info={sunrise} />
@@ -91,14 +79,13 @@ const styles = StyleSheet.create({
   },
 
   infoContainer: {
-    backgroundColor: 'rgba(34, 167, 240, 1)',
     padding: 20,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     borderStyle: "solid",
     borderBottomWidth: 1,
-    borderColor: 'rgba(228, 241, 254, 1)',
+    borderColor: 'rgba(228, 241, 254, 0.7)',
   },
 
   additionalText: {
