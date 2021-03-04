@@ -12,11 +12,11 @@ export default function LoaderContainer() {
 
   function onSuccess() {
     setIsLoaded(true);
-  }
+  };
 
   function onError() {
     setError(error);
-  }
+  };
 
   useEffect(() => {
     dispatch(forecastOperation.fetchForecast(onSuccess, onError));

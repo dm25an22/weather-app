@@ -1,7 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { useSelector } from 'react-redux';
-import { getSelectedDay } from '../redux/app-state/app-state-selector';
 import { getForecast } from '../redux/forecast/forecast-selector';
 
 export default function Header() {
@@ -21,7 +20,7 @@ export default function Header() {
       <Text style={styles.info}>Feels like {feelsLike}{'\u00b0'}</Text>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   headerContainer: {

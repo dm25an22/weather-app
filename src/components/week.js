@@ -24,7 +24,7 @@ export default function Week() {
       </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   weekConatiner: {

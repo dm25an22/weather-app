@@ -19,11 +19,11 @@ export default function Day({ data }) {
 
   function getStyle() {
     return selectedDay.getDate() === date.getDate() ? styles.activeDay : styles.dayText;
-  }
+  };
 
   function changeSelectedDay() {
     dispatch(ActionCreator.setSelectedDay(date));
-  }
+  };
 
   return (
     <TouchableOpacity onPress={changeSelectedDay}>

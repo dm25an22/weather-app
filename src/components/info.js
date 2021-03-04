@@ -70,7 +70,7 @@ export default function Info() {
       </View>
     </View>
   );
-}
+};
 
 
 const styles = StyleSheet.create({

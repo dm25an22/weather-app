@@ -6,4 +6,4 @@ import { reducer as appStateReducer } from "./app-state/app-state";
 export const rootReducer = combineReducers({
   [NameSpace.FORECAST]: forecastReducer,
   [NameSpace.APP_STATE]: appStateReducer,
-})
+});
